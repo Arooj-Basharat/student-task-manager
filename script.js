@@ -22,3 +22,22 @@ function searchTasks() {
         }
     });
 }
+const checkboxes = document.querySelectorAll('.complete-checkbox');
+
+checkboxes.forEach(box => {
+  box.addEventListener('change', () => {
+    const task = box.nextElementSibling;
+    if (box.checked) {
+      task.style.color = 'green';
+      task.style.textDecoration = 'line-through';
+    } else {
+      task.style.color = 'black';
+      task.style.textDecoration = 'none';
+    }
+  });
+});
+// Save status
+localStorage.setItem('taskStatus', JSON.stringify(statusArray));
+
+// Load status on page load
+const savedStatus = JSON.parse(localStorage.getItem('taskStatus'));
