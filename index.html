@@ -1,36 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Student Task Manager</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Task Manager</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Student Task Manager</h1>
-  <input type="text"id="search input" placeholder="Search tasks..."onkeyup="searchTasks()">
-  <form id="task-form">
-    <label for="task-title">Task Title</label>
-    <input type="text" id="task-title" placeholder="Enter task title">
+    <h1>Student Task Manager</h1>
 
-    <label for="task-description">Description</label>
-    <textarea id="task-description" placeholder="Enter task description"></textarea>
+    <!-- Search Bar -->
+    <input type="text" id="searchInput" placeholder="Search tasks...">
 
-    <button type="button" id="add-btn">Add</button>
-  </form>
+    <!-- Task Form -->
+    <form id="task-form">
+        <label for="task-title">Task Title</label>
+        <input type="text" id="task-title" placeholder="Enter task title" required>
 
-  <script src="script.js"></script>
+        <label for="task-description">Description</label>
+        <textarea id="task-description" placeholder="Enter task description"></textarea>
+
+        <button type="button" id="add-btn">Add</button>
+    </form>
+
+    <!-- Task List -->
+    <ul id="taskList">
+        <li class="task-card">
+            <input type="checkbox" class="complete-checkbox">
+            <span class="task-title">Buy groceries</span>
+            <button class="delete-btn">Delete</button>
+        </li>
+        <li class="task-card">
+            <input type="checkbox" class="complete-checkbox">
+            <span class="task-title">Finish assignment</span>
+            <button class="delete-btn">Delete</button>
+        </li>
+        <li class="task-card">
+            <input type="checkbox" class="complete-checkbox">
+            <span class="task-title">Call friend</span>
+            <button class="delete-btn">Delete</button>
+        </li>
+    </ul>
+
+    <script src="script.js"></script>
 </body>
 </html>
-<input type="text" id="searchInput" placeholder="Search tasks...">
-<ul id="taskList">
-  <li>Buy groceries</li>
-  <li>Finish assignment</li>
-  <li>Call friend</li>
-</ul>
-<li class="task">
-  <input type="checkbox" class="complete-checkbox">
-  <span class="task-title">Study GitHub issues</span>
-</li>
-<li class="task">
-  <span class="task-title">Study GitHub issues</span>
-  <button class="delete-btn">Delete</button>
-</li>

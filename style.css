@@ -1,8 +1,14 @@
+/* --- Global Styles --- */
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f6f8;
   margin: 0;
   padding: 20px;
+  color: #333;
 }
 
 h1 {
@@ -10,6 +16,19 @@ h1 {
   color: #2c3e50;
 }
 
+/* --- Search Bar --- */
+#searchInput {
+  display: block;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 12px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* --- Task Form --- */
 #task-form {
   max-width: 500px;
   margin: 20px auto;
@@ -28,38 +47,100 @@ label {
 input,
 textarea {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   margin-top: 5px;
-  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
 }
 
-button {
+#add-btn {
   margin-top: 15px;
-  padding: 10px 20px;
+  width: 100%;
+  padding: 12px;
   background-color: #3498db;
   color: #ffffff;
   border: none;
   border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
-button:hover {
+#add-btn:hover {
   background-color: #2980b9;
 }
 
-.task-card {
-  background: #ffffff;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+/* --- Task List --- */
+#taskList {
+  list-style: none; /* Bullet points hata dein */
+  padding: 0;
+  max-width: 500px;
+  margin: 20px auto;
 }
 
+.task-card {
+  display: flex; /* Checkbox, text, button ko ek line mein lane ke liye */
+  align-items: center;
+  background: #ffffff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  gap: 10px;
+}
+
+/* Checkbox styling */
+.complete-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Task text styling */
+.task-title {
+  flex-grow: 1; /* Text ko baaki jagah lene dein */
+  font-size: 16px;
+}
+
+/* --- Completed Task Styling --- */
+.completed .task-title {
+  text-decoration: line-through;
+  color: #27ae60; /* Green color jab task complete ho */
+}
+
+/* --- Delete Button Styling --- */
+.delete-btn {
+  background-color: #e74c3c; /* Red color */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* --- Responsive Design (Mobile) --- */
 @media (max-width: 600px) {
   body {
     padding: 10px;
   }
   #task-form {
     padding: 15px;
+  }
+  .task-card {
+    flex-direction: column; /* Mobile par checkbox, text, button ek ke neeche ek aayen */
+    align-items: flex-start;
+  }
+  .delete-btn {
+    width: 100%;
+    margin-top: 10px;
   }
 }

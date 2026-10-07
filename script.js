@@ -1,67 +1,44 @@
+// 1. Search Functionality
 const searchInput = document.getElementById("searchInput");
-const tasks = document.querySelectorAll("#taskList li");
+if (searchInput) {
+  searchInput.addEventListener("keyup", function () {
+    const filter = searchInput.value.toLowerCase();
+    // Note: Yaqeen karein ke aapke task items ka class 'task-card' ho
+    const tasks = document.querySelectorAll(".task-card"); 
 
-searchInput.addEventListener("keyup", function() {
-  const filter = searchInput.value.toLowerCase();
-  tasks.forEach(task => {
-    task.style.display = task.textContent.toLowerCase().includes(filter) ? "" : "none";
-  });
-});
-// Search functionality
-function searchTasks() {
-    let input = document.getElementById('searchInput').value.toLowerCase();
-    // Note: Agar aapke task ka class name alag hai (jaise .task-item), toh usay yahan badal lein
-    let tasks = document.querySelectorAll('.task-card'); 
-
-    tasks.forEach(function(task) {
-        let taskText = task.textContent.toLowerCase();
-        if (taskText.includes(input)) {
-            task.style.display = ""; // Task dikhao
-        } else {
-            task.style.display = "none"; // Task chhupao
-        }
+    tasks.forEach((task) => {
+      const taskText = task.textContent.toLowerCase();
+      if (taskText.includes(filter)) {
+        task.style.display = "";
+      } else {
+        task.style.display = "none";
+      }
     });
+  });
 }
-const checkboxes = document.querySelectorAll('.complete-checkbox');
 
-checkboxes.forEach(box => {
-  box.addEventListener('change', () => {
-    const task = box.nextElementSibling;
-    if (box.checked) {
-      task.style.color = 'green';
-      task.style.textDecoration = 'line-through';
-    } else {
-      task.style.color = 'black';
-      task.style.textDecoration = 'none';
+// 2. Mark Task as Completed (Checklist)
+document.addEventListener("change", function (e) {
+  if (e.target.classList.contains("complete-checkbox")) {
+    // Parent task card dhoondein
+    const task = e.target.closest(".task-card");
+    if (task) {
+      if (e.target.checked) {
+        task.classList.add("completed");
+      } else {
+        task.classList.remove("completed");
+      }
     }
-  });
+  }
 });
-// Save status
-localStorage.setItem('taskStatus', JSON.stringify(statusArray));
 
-// Load status on page load
-const savedStatus = JSON.parse(localStorage.getItem('taskStatus'));
-// Select all delete buttons
-const deleteButtons = document.querySelectorAll('.delete-btn');
-
-deleteButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const task = btn.parentElement; // li element
-    task.remove(); // task ko list se delete kar dega
-  });
-});
-function saveTasks() {
-  const tasks = [];
-  document.querySelectorAll('.task-title').forEach(t => {
-    tasks.push(t.textContent);
-  });
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-deleteButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const task = btn.parentElement;
-    task.remove();
-    saveTasks(); // update storage after deletion
-  });
+// 3. Delete Task Functionality
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("delete-btn")) {
+    // Parent task card dhoondein
+    const task = e.target.closest(".task-card");
+    if (task) {
+      task.remove(); // Task ko DOM se hata dein
+    }
+  }
 });
