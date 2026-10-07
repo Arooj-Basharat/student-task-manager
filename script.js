@@ -41,3 +41,27 @@ localStorage.setItem('taskStatus', JSON.stringify(statusArray));
 
 // Load status on page load
 const savedStatus = JSON.parse(localStorage.getItem('taskStatus'));
+// Select all delete buttons
+const deleteButtons = document.querySelectorAll('.delete-btn');
+
+deleteButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const task = btn.parentElement; // li element
+    task.remove(); // task ko list se delete kar dega
+  });
+});
+function saveTasks() {
+  const tasks = [];
+  document.querySelectorAll('.task-title').forEach(t => {
+    tasks.push(t.textContent);
+  });
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+deleteButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const task = btn.parentElement;
+    task.remove();
+    saveTasks(); // update storage after deletion
+  });
+});
